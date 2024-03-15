@@ -1,0 +1,35 @@
+﻿@model IEnumerable<CollectionManagement.Models.MyCollection>
+
+<div class="d-flex">
+    <div>
+        <h2>Latest collections and items</h2>
+        <a asp-area="User" asp-controller="Collections" asp-action="Create" type="button" class="btn btn-primary">Create collection</a>
+    </div>
+    <div>
+        <div class="input-group mb-3" style="margin-left: 200px;">
+          <input type="text" class="form-control" aria-describedby="basic-addon2" style="width: 300px;">
+          <div class="input-group-append">
+            <button class="btn btn-success" type="button">Search</button>
+          </div>
+        </div>
+    </div>
+</div>
+<hr />
+@{
+    ViewData["Title"] = "Index";
+}
+
+@foreach (var item in Model)
+{
+    <div class="card" style="width: 18rem; margin-bottom: 10px; margin-right: 20px;">
+        <img class="card-img-top" src="@item.ImageUrl" alt="Card image cap" style="height: 250px;">
+        <div class="card-body">
+            <h5 class="card-title">@item.Name</h5>
+            <p class="card-text">@item.Description</p>
+            <a class="btn btn-primary" asp-area="User" asp-controller="Collections" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+            <a class="btn btn-success" asp-area="User" asp-controller="Collections" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+            <a class="btn btn-danger" asp-area="User" asp-controller="Collections" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            <a class="btn" style="margin-top: 5px; width: 220px; background-color: rgb(200, 162, 200);" asp-route-id="@item.Id">Add new item</a>
+        </div>
+    </div>
+}
