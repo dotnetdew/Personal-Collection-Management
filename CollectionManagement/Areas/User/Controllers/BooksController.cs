@@ -1,6 +1,7 @@
 ﻿using CollectionManagement.Models;
 using CollectionManagement.Repositories;
 using CollectionManagement.Services;
+using CollectionManagement.ViewModels.Book;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -52,32 +53,30 @@ namespace CollectionManagement.Areas.User.Controllers
             if (collection is null)
                 return BadRequest();
 
-            var book = new Book();
-            book.CollectionId = collection.Id;
+            var bookVM = new BookCreateVM();
+            bookVM.CollectionId = collection.Id;
 
-            return View(book);
+            return View(bookVM);
         }
 
         // POST: BooksController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Book book)
+        public ActionResult Create(BookCreateVM bookVM)
         {
-            ModelState.Remove("Collection");
-
-            var collection = collectionsService.GetById(book.CollectionId);
-
-            if (collection is null)
-                return NotFound("Colllection Not Found");
-
-            book.Collection = collection;
-
             if (ModelState.IsValid)
             {
+                var collection = collectionsService.GetById(bookVM.CollectionId);
+
+                if (collection is null)
+                    return BadRequest("Collection Not Found");
+
+                var book = bookVM.MapToModel();
+
                 bookService.Insert(book);
                 return RedirectToAction("Index", "Books", new { collectionId = book.CollectionId });
             }
-            return View(book);
+            return View(bookVM);
         }
 
         // GET: BooksController/Edit/5
@@ -88,30 +87,39 @@ namespace CollectionManagement.Areas.User.Controllers
                 return NotFound();
             }
 
-            var collection = bookService.GetById(id);
-            if (collection == null)
+            var book = bookService.GetById(id);
+            if (book == null)
             {
                 return NotFound();
             }
-            return View(collection);
+            var bookEditVM = new BookEditVM(book);
+
+            return View(bookEditVM);
         }
 
         // POST: BooksController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Guid id, Book book)
+        public ActionResult Edit(Guid id, BookEditVM bookVM)
         {
-            if (id != book.Id)
+            if (id != bookVM.Id)
+            {
+                return NotFound();
+            }
+
+            var existingBook = bookService.GetById(bookVM.Id);
+            if (existingBook == null)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
+                var book = bookVM.MapToModel(existingBook);
                 bookService.Update(book);
                 return RedirectToAction("Index", new { collectionId = book.CollectionId });
             }
-            return View(book);
+            return View(bookVM);
         }
 
         // GET: BooksController/Delete/5

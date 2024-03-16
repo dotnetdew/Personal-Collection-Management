@@ -1,4 +1,4 @@
-﻿@model CollectionManagement.Models.Book
+﻿@model CollectionManagement.ViewModels.Book.BookCreateVM
 
 @{
     ViewData["Title"] = "Create";
@@ -47,7 +47,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" asp-route-collectionId="@Model.CollectionId">Back to List</a>
 </div>
 
 @section Scripts {

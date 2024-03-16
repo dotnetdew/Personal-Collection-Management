@@ -2,8 +2,12 @@
 
 @{
     ViewData["Title"] = "Index";
+    var book = Model.FirstOrDefault();
 }
 <h1>All Books</h1>
+<a class="btn btn-primary" asp-controller="Collections" asp-action="Index" style="margin-bottom: 30px;">Back to Collections</a>
+<a class="btn btn-success" asp-action="Create" asp-route-collectionId="@book.CollectionId" style="margin-bottom: 30px;">Add a new Book</a>
+
 <div class="d-flex flex-wrap">
     @foreach(var item in Model)
     {
