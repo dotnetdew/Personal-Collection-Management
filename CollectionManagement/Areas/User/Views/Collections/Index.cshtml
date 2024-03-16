@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<CollectionManagement.Models.MyCollection>
+@using CollectionManagement.Enums
 
 @{
     ViewData["Title"] = "Index";
@@ -6,10 +7,22 @@
 
 <h1>Index</h1>
 
-<p>
-    <a class="btn btn-primary" asp-action="Create">Create New</a>
-</p>
-
+<div class="d-flex">
+    <div>
+        <p>
+            <a class="btn btn-primary" asp-action="Create" style="margin-right: 600px;">Create New</a>
+        </p>
+    </div>
+    <div>
+        <div class="input-group mb-3" style="width: 400px;">
+            <input type="text" class="form-control" aria-describedby="basic-addon2" style="width: 300px;">
+            <div class="input-group-append">
+                <button class="btn btn-success" type="button">Search</button>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
 <div class="d-flex flex-wrap">
     @foreach (var item in Model)
     {
@@ -21,7 +34,28 @@
                 <a class="btn btn-primary" asp-area="User" asp-controller="Collections" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a class="btn btn-success" asp-area="User" asp-controller="Collections" asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a class="btn btn-danger" asp-area="User" asp-controller="Collections" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                <a class="btn" style="margin-top: 5px; width: 220px; background-color: rgb(200, 162, 200);" asp-route-id="@item.Id">Add new item</a>
+
+                @{
+                    var topic = item.Topic;
+
+                    var controllerName = topic switch
+                    {
+                        Topic.Coins => "Coins",
+                        Topic.PostStamps => "PostStamps",
+                        Topic.Books => "Books",
+                        _ => ""
+                    };
+                }
+
+                <a class="btn btn-warning"
+                   asp-controller="@controllerName"
+                   asp-action="Index"
+                   asp-route-collectionId="@item.Id">Show All</a>
+
+                <a class="btn"
+                asp-controller="@controllerName"
+                asp-action="Create" style="margin-top: 5px; width: 220px; background-color: rgb(200, 162, 200);"
+                asp-route-collectionId="@item.Id">Add new item</a>
             </div>
         </div>
     }

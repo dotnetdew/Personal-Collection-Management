@@ -59,8 +59,9 @@ namespace CollectionManagement.Areas.User.Controllers
         {
             if (ModelState.IsValid)
             {
-                _collectionsService.Insert(collection);
                 collection.AppUserId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                _collectionsService.Insert(collection);
                 return RedirectToAction("Index", "Collections");
             }
             return View(collection);

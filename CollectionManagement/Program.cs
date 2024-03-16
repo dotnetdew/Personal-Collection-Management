@@ -14,6 +14,9 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddScoped<ICollectionsRepository, CollectionsRepository>();
 builder.Services.AddScoped<ICollectionsService, CollectionsService>();
+builder.Services.AddScoped<IBookService, BookService>();
+builder.Services.AddScoped<IBookRepository, BookRepository>();
+
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 {
