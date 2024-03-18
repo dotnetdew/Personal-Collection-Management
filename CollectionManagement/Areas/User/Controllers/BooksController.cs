@@ -25,7 +25,20 @@ namespace CollectionManagement.Areas.User.Controllers
         {
             var books = bookService.GetBooksByCollectionId(collectionId);
 
-            return View(books);
+            var bookVMs = books.Select(book => new BookVM()
+            {
+                Id = book.Id,
+                Name = book.Name,
+                Author = book.Author,
+                Tag = book.Tag,
+                PublicationYear = book.PublicationYear,
+                CollectionId = book.CollectionId,
+                ImageSrc = $"data:{book.ImageMimeType};base64,{Convert.ToBase64String(book.ImageData)}"
+            });
+
+            ViewBag.CollectionId = collectionId;
+
+            return View(bookVMs);
         }
 
         // GET: BooksController/Details/5

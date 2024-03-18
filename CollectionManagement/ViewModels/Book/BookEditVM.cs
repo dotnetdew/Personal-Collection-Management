@@ -14,7 +14,6 @@ namespace CollectionManagement.ViewModels.Book
             Name = book.Name;
             Author = book.Author;
             Tag = book.Tag;
-            ImageUrl = book.ImageUrl;
             PublicationYear = book.PublicationYear;
             CollectionId = book.CollectionId;
         }
@@ -22,17 +21,28 @@ namespace CollectionManagement.ViewModels.Book
         public string Name { get; set; }
         public string Author { get; set; }
         public string Tag { get; set; }
-        public string ImageUrl { get; set; }
         public int PublicationYear { get; set; }
         public Guid CollectionId { get; set; }
+        public IFormFile ImageFile { get; set; }
         public Models.Book MapToModel(Models.Book book)
         {
-            book.Id = this.Id;
-            book.Name = this.Name;
-            book.Author = this.Author;
-            book.Tag = this.Tag;
-            book.ImageUrl = this.ImageUrl;
-            book.PublicationYear = this.PublicationYear;
+            CollectionId = this.CollectionId;
+            Id = this.Id;
+            Name = this.Name;
+            Author = this.Author;
+            Tag = this.Tag;
+            PublicationYear = this.PublicationYear;
+
+            if (ImageFile != null && ImageFile.Length > 0)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    this.ImageFile.CopyTo(memoryStream);
+                    book.ImageData = memoryStream.ToArray();
+                    book.ImageMimeType = this.ImageFile.ContentType;
+                }
+            }
+
             return book;
         }
     }
