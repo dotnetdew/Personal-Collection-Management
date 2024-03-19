@@ -16,6 +16,8 @@ builder.Services.AddScoped<ICollectionsRepository, CollectionsRepository>();
 builder.Services.AddScoped<ICollectionsService, CollectionsService>();
 builder.Services.AddScoped<IBookService, BookService>();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
+builder.Services.AddScoped<ICoinService, CoinService>();
+builder.Services.AddScoped<ICoinRepository, CoinRepository>();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 {

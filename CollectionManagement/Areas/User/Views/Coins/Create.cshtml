@@ -1,4 +1,4 @@
-﻿@model CollectionManagement.ViewModels.Book.BookCreateVM
+﻿@model CollectionManagement.ViewModels.Coin.CoinCreateVM
 
 @{
     ViewData["Title"] = "Create";
@@ -6,7 +6,7 @@
 
 <h1>Create</h1>
 
-<h4>Book</h4>
+<h4>Coin</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -20,24 +20,24 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Author" clasas="control-label"></label>
-                <input asp-for="Author" class="form-control" />
-                <span asp-validation-for="Author" class="text-danger"></span>
+                <label asp-for="Description" clasas="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ImageFile" class="control-label">Choose Image</label>
-                <input asp-for="ImageFile" type="file" class="form-control-file"/>
+                <input asp-for="ImageFile" type="file" class="form-control-file" />
                 <span asp-validation-for="ImageFile" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PublicationYear" class="control-label"></label>
-                <input asp-for="PublicationYear" class="form-control" />
-                <span asp-validation-for="PublicationYear" class="text-danger"></span>
+                <label asp-for="Country" class="control-label"></label>
+                <input asp-for="Country" class="form-control" />
+                <span asp-validation-for="Country" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Tag" class="control-label"></label>
-                <input asp-for="Tag" class="form-control" />
-                <span asp-validation-for="Tag" class="text-danger"></span>
+                <label asp-for="ValueInUSD" class="control-label"></label>
+                <input asp-for="ValueInUSD" class="form-control" />
+                <span asp-validation-for="ValueInUSD" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
