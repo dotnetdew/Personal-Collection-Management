@@ -45,13 +45,13 @@ namespace CollectionManagement.Areas.User.Controllers
                 return NotFound();
             }
 
-            var collection = coinService.GetById(id);
-            if (collection == null)
+            var coin = coinService.GetById(id);
+            if (coin == null)
             {
                 return NotFound();
             }
 
-            return View(collection);
+            return View(coin);
         }
 
         // GET: BooksController/Create
@@ -96,39 +96,40 @@ namespace CollectionManagement.Areas.User.Controllers
                 return NotFound();
             }
 
-            var book = coinService.GetById(id);
-            if (book == null)
+            var coin = coinService.GetById(id);
+            if (coin == null)
             {
                 return NotFound();
             }
-            //var bookEditVM = new BookEditVM(book);
 
-            return View();
+            var coinEditVM = new CoinEditVM(coin);
+
+            return View(coinEditVM);
         }
 
         // POST: BooksController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Guid id, BookEditVM bookVM)
+        public ActionResult Edit(Guid id, CoinEditVM coinVM)
         {
-            if (id != bookVM.Id)
+            if (id != coinVM.Id)
             {
                 return NotFound();
             }
 
-            var existingBook = coinService.GetById(bookVM.Id);
-            if (existingBook == null)
+            var existingCoin = coinService.GetById(coinVM.Id);
+            if (existingCoin == null)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                //var book = bookVM.MapToModel(existingBook);
-                //coinService.Update(book);
-                return RedirectToAction("Index" /*new { collectionId = book.CollectionId }*/);
+                var coin = coinVM.MapToModel(existingCoin);
+                coinService.Update(coin);
+                return RedirectToAction("Index", new { collectionId = coin.CollectionId });
             }
-            return View(bookVM);
+            return View(coinVM);
         }
 
         // GET: BooksController/Delete/5
@@ -140,13 +141,13 @@ namespace CollectionManagement.Areas.User.Controllers
                 return NotFound();
             }
 
-            var collection = coinService.GetById(id);
-            if (collection == null)
+            var coin = coinService.GetById(id);
+            if (coin == null)
             {
                 return NotFound();
             }
 
-            return View(collection);
+            return View(coin);
         }
 
         // POST: BooksController/Delete/5
@@ -154,12 +155,12 @@ namespace CollectionManagement.Areas.User.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            var book = coinService.GetById(id);
-            if (book != null)
+            var coin = coinService.GetById(id);
+            if (coin != null)
             {
-                coinService.Delete(book);
+                coinService.Delete(coin);
             }
-            return RedirectToAction("Index", new { collectionId = book.CollectionId });
+            return RedirectToAction("Index", new { collectionId = coin.CollectionId });
         }
     }
 }

@@ -49,13 +49,13 @@ namespace CollectionManagement.Areas.User.Controllers
                 return NotFound();
             }
 
-            var collection = bookService.GetById(id);
-            if (collection == null)
+            var book = bookService.GetById(id);
+            if (book == null)
             {
                 return NotFound();
             }
 
-            return View(collection);
+            return View(book);
         }
 
         // GET: BooksController/Create

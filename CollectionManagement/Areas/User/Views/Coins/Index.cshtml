@@ -18,9 +18,9 @@
                 <p class="card-text">Country: @item.Country</p>
                 <p class="card-text">Value: @item.ValueInUSD $</p>
                 <img src="@item.ImageSrc" alt="Book Image" style="width: 250px; height: 200px; margin-bottom: 5px;" />
-                <a class="btn btn-primary" asp-area="User" asp-controller="Books" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a class="btn btn-success" asp-area="User" asp-controller="Books" asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a class="btn btn-danger" asp-area="User" asp-controller="Books" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a class="btn btn-primary" asp-area="User" asp-controller="Coins" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a class="btn btn-success" asp-area="User" asp-controller="Coins" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a class="btn btn-danger" asp-area="User" asp-controller="Coins" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </div>
         </div>
     }

@@ -26,12 +26,12 @@ namespace CollectionManagement.ViewModels.Book
         public IFormFile ImageFile { get; set; }
         public Models.Book MapToModel(Models.Book book)
         {
-            CollectionId = this.CollectionId;
-            Id = this.Id;
-            Name = this.Name;
-            Author = this.Author;
-            Tag = this.Tag;
-            PublicationYear = this.PublicationYear;
+            book.CollectionId = this.CollectionId;
+            book.Id = this.Id;
+            book.Name = this.Name;
+            book.Author = this.Author;
+            book.Tag = this.Tag;
+            book.PublicationYear = this.PublicationYear;
 
             if (ImageFile != null && ImageFile.Length > 0)
             {
