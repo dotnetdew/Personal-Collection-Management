@@ -1,6 +1,6 @@
-﻿@model IEnumerable<CollectionManagement.Models.MyCollection>
+﻿@model IEnumerable<CollectionManagement.ViewModels.MyCollection.MyCollectionVM>
 
-<div class="d-flex">
+<div class="d-flex" style="margin-bottom: 30px;">
     <div>
         <h2>Latest collections and items</h2>
         <a asp-area="User" asp-controller="Collections" asp-action="Create" type="button" class="btn btn-primary">Create collection</a>
@@ -14,7 +14,6 @@
         </div>
     </div>
 </div>
-<hr />
 @{
     ViewData["Title"] = "Index";
 }
@@ -23,7 +22,7 @@
     @foreach (var item in Model)
     {
         <div class="card" style="width: 18rem; margin-bottom: 10px; margin-right: 20px;">
-            <img class="card-img-top" src="@item.ImageUrl" alt="Card image cap" style="height: 250px;">
+            <img class="card-img-top" src="@item.ImageSrc" alt="Card image cap" style="width: 250px; height: 200px; margin-bottom: 5px;">
             <div class="card-body">
                 <h5 class="card-title">@item.Name</h5>
                 <p class="card-text">@item.Description</p>

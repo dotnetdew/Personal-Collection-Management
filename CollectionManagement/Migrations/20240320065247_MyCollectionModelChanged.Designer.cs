@@ -4,6 +4,7 @@ using CollectionManagement.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CollectionManagement.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240320065247_MyCollectionModelChanged")]
+    partial class MyCollectionModelChanged
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -155,11 +158,7 @@ namespace CollectionManagement.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("ImageData")
-                        .IsRequired()
-                        .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("ImageMimeType")
+                    b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -420,13 +419,13 @@ namespace CollectionManagement.Migrations
                         {
                             Id = "9a535a8f-dccf-4a1d-a25d-d9c3bb4803de",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2d0e6f1e-b7bf-42ac-8cba-de1771e07535",
+                            ConcurrencyStamp = "d5428f8b-0bbe-43c5-afa8-f94b4731fc5b",
                             Email = "admin@admin.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEG/eZ2O52ALBBeojHD53i1E6E0Y4ovaUNtcIdCSfGdydGoKFjY4e68hd973dhJWXLg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKvkzbG9svkx7gRXmss1jS6liZojM80QveqMSHccrqwc0EXRi/w/72SZTvyq9VCvTg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "bc7ce8c5-9df7-4326-93d0-8504b8329b57",
+                            SecurityStamp = "a0752ae0-f727-4cc9-b306-6b7952d34a58",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         },
@@ -434,13 +433,13 @@ namespace CollectionManagement.Migrations
                         {
                             Id = "d47b3c1e-1310-409d-b893-0a662a64c35d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "aefff190-1de6-4d7e-a3cb-55fb639c87f1",
+                            ConcurrencyStamp = "dac3d60d-a7ed-4ad6-a2c5-b03875b7eeeb",
                             Email = "user@user.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAED9hxkPfDo/Z0WZg1SYcC5Zn9kk1COMdIEmNgCWeiurAAg4NHj6kgIzUPWzReJ8SYw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMdch1OB8+nz21uSbV8pfXoWvJTYTvAk7YhxXOG+ZUbJARiG8RZq6KR9evzk40eNJg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8f3d7e87-625d-4c1c-a90a-97e03c9087d1",
+                            SecurityStamp = "8c115f26-48a4-4e3c-8e47-0c26e9395567",
                             TwoFactorEnabled = false,
                             UserName = "user@user.com"
                         });

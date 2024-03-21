@@ -1,5 +1,6 @@
 using CollectionManagement.Models;
 using CollectionManagement.Services;
+using CollectionManagement.ViewModels.MyCollection;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -17,7 +18,18 @@ namespace CollectionManagement.Controllers
 
         public IActionResult Index()
         {
-            return View(_collectionsService.GetAll());
+            var Collections = _collectionsService.GetAll();
+
+            var collectionsVM = Collections.Select(c => new MyCollectionVM()
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Description = c.Description,
+                Topic = c.Topic,
+                ImageSrc = $"data:{c.ImageMimeType};base64,{Convert.ToBase64String(c.ImageData)}"
+            });
+
+            return View(collectionsVM);
         }
 
         public IActionResult Privacy()

@@ -18,6 +18,8 @@ builder.Services.AddScoped<IBookService, BookService>();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<ICoinService, CoinService>();
 builder.Services.AddScoped<ICoinRepository, CoinRepository>();
+builder.Services.AddScoped<IPostStampRepository, PostStampRepository>();
+builder.Services.AddScoped<IPostStampService, PostStampService>();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 {

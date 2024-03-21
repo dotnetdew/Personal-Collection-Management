@@ -1,5 +1,4 @@
 ﻿using CollectionManagement.Services;
-using CollectionManagement.ViewModels.Book;
 using CollectionManagement.ViewModels.Coin;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,11 +11,13 @@ namespace CollectionManagement.Areas.User.Controllers
     {
         private readonly ICoinService coinService;
         private readonly ICollectionsService collectionsService;
+
         public CoinsController(ICoinService _coinService, ICollectionsService _collectionsService)
         {
             coinService = _coinService;
             collectionsService = _collectionsService;
         }
+
         public ActionResult Index(Guid collectionId)
         {
             var books = coinService.GetCoinsByCollectionId(collectionId);

@@ -1,0 +1,25 @@
+﻿@model IEnumerable<CollectionManagement.ViewModels.PostStamp.PostStampVM>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<h1>All Post Stamps</h1>
+<a class="btn btn-primary" asp-controller="Collections" asp-action="Index" style="margin-bottom: 30px;">Back to Collections</a>
+<a class="btn btn-success" asp-action="Create" asp-route-collectionId="@ViewBag.CollectionId" style="margin-bottom: 30px;">Add a new Post Stamp</a>
+
+<div class="d-flex flex-wrap">
+    @foreach (var item in Model)
+    {
+        <div class="card" style="width: 18rem; margin-bottom: 10px; margin-right: 20px;">
+            <div class="card-body">
+                <h5 class="card-title">@item.Name</h5>
+                <p class="card-text">@item.Description</p>
+                <p class="card-text">Country: @item.Country</p>
+                <img src="@item.ImageSrc" alt="Book Image" style="width: 250px; height: 200px; margin-bottom: 5px;" />
+                <a class="btn btn-primary" asp-area="User" asp-controller="PostStamps" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a class="btn btn-success" asp-area="User" asp-controller="PostStamps" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a class="btn btn-danger" asp-area="User" asp-controller="PostStamps" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </div>
+        </div>
+    }
+</div>

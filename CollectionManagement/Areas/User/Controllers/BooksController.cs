@@ -1,12 +1,7 @@
-﻿using CollectionManagement.Models;
-using CollectionManagement.Repositories;
-using CollectionManagement.Services;
+﻿using CollectionManagement.Services;
 using CollectionManagement.ViewModels.Book;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Drawing.Printing;
-using System.Security.Claims;
 
 namespace CollectionManagement.Areas.User.Controllers
 {
@@ -16,11 +11,13 @@ namespace CollectionManagement.Areas.User.Controllers
     {
         private readonly IBookService bookService;
         private readonly ICollectionsService collectionsService;
+
         public BooksController(IBookService _bookService, ICollectionsService _collectionsService)
         {
             bookService = _bookService;
             collectionsService = _collectionsService;
         }
+
         public ActionResult Index(Guid collectionId)
         {
             var books = bookService.GetBooksByCollectionId(collectionId);

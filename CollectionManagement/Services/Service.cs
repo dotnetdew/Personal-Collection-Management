@@ -1,15 +1,16 @@
-﻿
-using CollectionManagement.Repositories;
+﻿using CollectionManagement.Repositories;
 
 namespace CollectionManagement.Services
 {
     public class Service<T> : IService<T> where T : class
     {
         protected readonly IRepository<T> _repository;
+
         public Service(IRepository<T> repository)
         {
             _repository = repository;
         }
+
         public virtual void Delete(T entity)
         {
             _repository.Delete(entity);
