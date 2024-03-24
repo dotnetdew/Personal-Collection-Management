@@ -21,5 +21,25 @@ namespace CollectionManagement.Areas.Admin.Controllers
             var users = _userManager.Users.ToList();
             return View(users);
         }
+
+        [HttpPost]
+        public IActionResult Block(Guid appUserId)
+        {
+            return Ok();
+        }
+
+        [HttpPost]
+        public IActionResult Delete([FromForm(Name = "userIds[]")]string[] IDs)
+        {
+            foreach (var user in _userManager.Users)
+            {
+                if (IDs.Contains(user.Id))
+                {
+                    _userManager.DeleteAsync(user);
+                }
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }
