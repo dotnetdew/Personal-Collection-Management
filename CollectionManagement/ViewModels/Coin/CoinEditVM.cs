@@ -4,8 +4,8 @@
     {
         public CoinEditVM()
         {
-            
         }
+
         public CoinEditVM(Models.Coin coin)
         {
             Id = coin.Id;

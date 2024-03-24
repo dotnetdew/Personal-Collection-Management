@@ -12,8 +12,10 @@ namespace CollectionManagement.Models
         public virtual ICollection<Book>? Books { get; set; }
         public virtual ICollection<Coin>? Coins { get; set; }
         public virtual ICollection<PostStamp>? PostStamps { get; set; }
+
         [ForeignKey("AppUser")]
         public string? AppUserId { get; set; }
+
         public virtual AppUser? AppUser { get; set; }
         public byte[] ImageData { get; set; }
         public string ImageMimeType { get; set; }

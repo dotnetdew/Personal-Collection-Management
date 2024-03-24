@@ -1,16 +1,15 @@
 using CollectionManagement.Models;
 using CollectionManagement.Services;
 using CollectionManagement.ViewModels.MyCollection;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using System.Security.Claims;
 
 namespace CollectionManagement.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ICollectionsService _collectionsService;
+
         public HomeController(ICollectionsService collectionsService)
         {
             _collectionsService = collectionsService;

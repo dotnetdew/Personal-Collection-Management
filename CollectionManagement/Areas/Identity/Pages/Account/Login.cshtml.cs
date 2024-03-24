@@ -2,27 +2,21 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+using CollectionManagement.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
+using System.ComponentModel.DataAnnotations;
 
 namespace CollectionManagement.Areas.Identity.Pages.Account
 {
     public class LoginModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly SignInManager<AppUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<AppUser> signInManager, ILogger<LoginModel> logger)
         {
             _signInManager = signInManager;
             _logger = logger;
@@ -116,12 +110,11 @@ namespace CollectionManagement.Areas.Identity.Pages.Account
 
                     if (User.IsInRole("User"))
                     {
-                        return RedirectToAction("Index", "Collections", new { Area = "User"});
+                        return RedirectToAction("Index", "Collections", new { Area = "User" });
                     }
                     else if (User.IsInRole("Admin"))
                     {
-                        //not implemented yet
-                        return RedirectToAction("Index", "Admin", new { Area = "Admin" });
+                        return RedirectToAction("Index", "Manage", new { Area = "Admin" });
                     }
 
                     return LocalRedirect(returnUrl);

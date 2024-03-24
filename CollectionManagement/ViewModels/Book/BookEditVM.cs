@@ -1,13 +1,11 @@
-﻿using CollectionManagement.Models;
-
-namespace CollectionManagement.ViewModels.Book
+﻿namespace CollectionManagement.ViewModels.Book
 {
     public class BookEditVM
     {
         public BookEditVM()
         {
-            
         }
+
         public BookEditVM(Models.Book book)
         {
             Id = book.Id;
@@ -17,6 +15,7 @@ namespace CollectionManagement.ViewModels.Book
             PublicationYear = book.PublicationYear;
             CollectionId = book.CollectionId;
         }
+
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Author { get; set; }
@@ -24,6 +23,7 @@ namespace CollectionManagement.ViewModels.Book
         public int PublicationYear { get; set; }
         public Guid CollectionId { get; set; }
         public IFormFile ImageFile { get; set; }
+
         public Models.Book MapToModel(Models.Book book)
         {
             book.CollectionId = this.CollectionId;

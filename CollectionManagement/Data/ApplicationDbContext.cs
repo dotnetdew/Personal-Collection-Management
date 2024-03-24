@@ -2,20 +2,21 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Emit;
 
 namespace CollectionManagement.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<AppUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
+
         public DbSet<Book> Books { get; set; }
         public DbSet<Coin> Coins { get; set; }
         public DbSet<PostStamp> PostStamps { get; set; }
-        public DbSet<CollectionManagement.Models.MyCollection> Collection { get; set; } = default!;
+        public DbSet<MyCollection> Collection { get; set; }
+        public DbSet<AppUser> AppUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

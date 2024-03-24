@@ -6,8 +6,8 @@ namespace CollectionManagement.ViewModels.MyCollection
     {
         public MyCollectionEditVM()
         {
-            
         }
+
         public MyCollectionEditVM(Models.MyCollection collection)
         {
             Id = collection.Id;
@@ -15,6 +15,7 @@ namespace CollectionManagement.ViewModels.MyCollection
             Description = collection.Description;
             Topic = collection.Topic;
         }
+
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

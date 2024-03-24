@@ -1,12 +1,12 @@
 ﻿using CollectionManagement.Models;
 using CollectionManagement.Repositories;
-using Microsoft.VisualBasic;
 
 namespace CollectionManagement.Services
 {
     public class CollectionsService : Service<MyCollection>, ICollectionsService
     {
         private ICollectionsRepository _collectionsRepository;
+
         public CollectionsService(ICollectionsRepository repository) : base(repository)
         {
             _collectionsRepository = repository;

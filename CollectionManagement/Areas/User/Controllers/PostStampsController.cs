@@ -1,8 +1,6 @@
 ﻿using CollectionManagement.Services;
-using CollectionManagement.ViewModels.Coin;
 using CollectionManagement.ViewModels.PostStamp;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CollectionManagement.Areas.User.Controllers

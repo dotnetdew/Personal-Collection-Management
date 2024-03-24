@@ -1,6 +1,4 @@
-﻿using CollectionManagement.Models;
-
-namespace CollectionManagement.ViewModels.Book
+﻿namespace CollectionManagement.ViewModels.Book
 {
     public class BookCreateVM
     {
@@ -21,7 +19,7 @@ namespace CollectionManagement.ViewModels.Book
                 PublicationYear = this.PublicationYear,
                 CollectionId = this.CollectionId
             };
-            
+
             if (this.ImageFile != null && this.ImageFile.Length > 0)
             {
                 using (var memoryStream = new MemoryStream())

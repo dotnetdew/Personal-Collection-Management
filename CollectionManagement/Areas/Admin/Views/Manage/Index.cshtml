@@ -1,0 +1,49 @@
+﻿@using CollectionManagement.Models
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<AppUser> UserManager
+@model List<CollectionManagement.Models.AppUser>
+
+@{
+    ViewData["Title"] = "User Management";
+}
+
+<div class="container mt-4">
+    <h1>User Management</h1>
+
+    <table class="table table-striped mt-4">
+        <thead>
+            <tr>
+                <th>
+                    Block
+                </th>
+                <th>Id</th>
+                <th>Email</th>
+                <th>UserName</th>
+                <th>Role</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                            @* <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label> *@
+                        </div>
+                    </td>
+                    <td>@user.Id</td>
+                    <td>@user.Email</td>
+                    <td>@user.UserName</td>
+                    <td>
+                        @foreach (var role in await UserManager.GetRolesAsync(user))
+                        {
+                            <span class="badge badge-primary">@role</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

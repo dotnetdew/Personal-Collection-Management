@@ -1,6 +1,5 @@
 ﻿using CollectionManagement.Models;
 using CollectionManagement.Repositories;
-using System.Drawing.Printing;
 
 namespace CollectionManagement.Services
 {

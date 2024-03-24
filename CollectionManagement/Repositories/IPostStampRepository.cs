@@ -4,6 +4,5 @@ namespace CollectionManagement.Repositories
 {
     public interface IPostStampRepository : IRepository<PostStamp>
     {
-
     }
 }

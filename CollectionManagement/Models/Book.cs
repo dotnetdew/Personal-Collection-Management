@@ -1,6 +1,4 @@
-﻿using CollectionManagement.Enums;
-
-namespace CollectionManagement.Models
+﻿namespace CollectionManagement.Models
 {
     public class Book
     {
