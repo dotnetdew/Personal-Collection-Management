@@ -1,4 +1,5 @@
-﻿using CollectionManagement.Models;
+﻿using CollectionManagement.Data;
+using CollectionManagement.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +11,11 @@ namespace CollectionManagement.Areas.Admin.Controllers
     public class ManageController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
-
-        public ManageController(UserManager<AppUser> userManager)
+        private readonly ApplicationDbContext _context;
+        public ManageController(UserManager<AppUser> userManager, ApplicationDbContext context)
         {
             _userManager = userManager;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -23,19 +25,52 @@ namespace CollectionManagement.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Block(Guid appUserId)
+        public IActionResult Block([FromForm(Name = "userIds[]")] string[] IDs)
         {
-            return Ok();
+            var users = _context.Users.ToList();
+
+            foreach (var user in users)
+            {
+                if (IDs.Contains(user.Id))
+                {
+                    user.IsBlocked = true;
+                    _context.Update(user);
+                    _context.SaveChanges();
+                }
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult UnBlock([FromForm(Name = "userIds[]")] string[] IDs)
+        {
+            var users = _context.Users.ToList();
+
+            foreach (var user in users)
+            {
+                if (IDs.Contains(user.Id))
+                {
+                    user.IsBlocked = false;
+                    _context.Update(user);
+                    _context.SaveChanges();
+                }
+            }
+
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
         public IActionResult Delete([FromForm(Name = "userIds[]")]string[] IDs)
         {
-            foreach (var user in _userManager.Users)
+            var users = _context.Users.ToList();
+
+            foreach (var user in users)
             {
                 if (IDs.Contains(user.Id))
                 {
-                    _userManager.DeleteAsync(user);
+                    _context.Remove(user);
+                    _context.SaveChanges();
                 }
             }
 

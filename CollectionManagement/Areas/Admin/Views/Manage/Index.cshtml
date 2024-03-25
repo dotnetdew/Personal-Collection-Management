@@ -27,6 +27,7 @@
                 <th>Email</th>
                 <th>UserName</th>
                 <th>Role</th>
+                <th>IsBlocked</th>
             </tr>
         </thead>
 
@@ -51,6 +52,10 @@
                             <span class="badge badge-primary">@role</span>
                         }
                     </td>
+                    <td>
+                        @(user.IsBlocked ? "Blocked" : "UnBlocked")
+                    </td>
+
                 </tr>
             }
         </tbody>
@@ -58,11 +63,11 @@
 </div>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function () {
+        //delete button function
         $('.delete-button').click(function () {
-
             var checkedCheckboxes = $('#userTable').find('.block-checkbox:checked');
 
             if (checkedCheckboxes.length === 0) { 
@@ -73,16 +78,76 @@
             var userIds = [];
 
             checkedCheckboxes.each(function () {
-                userIds.push($(this).data('user-id');
+                userIds.push($(this).data('user-id'));
             });
 
             $.ajax({
                 url: '/Admin/Manage/Delete',
                 type: 'POST',
-                dataType: 'json',
                 data: { userIds: userIds },
                 success: function (data) {
                     alert('Deleted successfully');
+                    window.location.reload();
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.error('AJAX error:', textStatus, errorThrown);
+                    alert('Error, not deleted');
+                }
+            });
+        });
+
+        //block button function
+        $('.block-button').click(function () {
+            var checkedCheckboxes = $('#userTable').find('.block-checkbox:checked');
+
+            if (checkedCheckboxes.length === 0) {
+                alert('Please select at least one user to block');
+                return;
+            }
+
+            var userIds = [];
+
+            checkedCheckboxes.each(function () {
+                userIds.push($(this).data('user-id'));
+            });
+
+            $.ajax({
+                url: '/Admin/Manage/Block',
+                type: 'POST',
+                data: { userIds: userIds },
+                success: function (data) {
+                    alert('Blocked successfully');
+                    window.location.reload();
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.error('AJAX error:', textStatus, errorThrown);
+                    alert('Error, not deleted');
+                }
+            });
+        });
+
+        //unblock button function
+        $('.unblock-button').click(function () {
+            var checkedCheckboxes = $('#userTable').find('.block-checkbox:checked');
+
+            if (checkedCheckboxes.length === 0) {
+                alert('Please select at least one user to block');
+                return;
+            }
+
+            var userIds = [];
+
+            checkedCheckboxes.each(function () {
+                userIds.push($(this).data('user-id'));
+            });
+
+            $.ajax({
+                url: '/Admin/Manage/UnBlock',
+                type: 'POST',
+                data: { userIds: userIds },
+                success: function (data) {
+                    alert('UnBlocked successfully');
+                    window.location.reload();
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     console.error('AJAX error:', textStatus, errorThrown);

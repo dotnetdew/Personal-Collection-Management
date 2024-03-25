@@ -1,3 +1,4 @@
+using Castle.Core.Smtp;
 using CollectionManagement.Data;
 using CollectionManagement.Models;
 using CollectionManagement.Repositories;
